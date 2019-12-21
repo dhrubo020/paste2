@@ -16,7 +16,7 @@ exports.home = function (req, res) {
 
 exports.call_send = function(req,res){
     var data = req.body; subject = data.Subject; text = req.body.Text;
-    console.log("Met :" + JSON.stringify(data));
+    
 
     if(req.method == "POST"){
 
@@ -39,6 +39,7 @@ exports.call_send = function(req,res){
                    "Message" : text,
                    "Date" : date.toLocaleString()
                }
+               console.log("Met :" + JSON.stringify({data:data}));
                res.json({data:data});
             }
         });
