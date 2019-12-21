@@ -98,7 +98,7 @@ color:#fff;
     border: none;
     background: #f1f1f1;
     resize: none;
-    min-height: 85px;
+    min-height: 75px;
   }
   
   /* When the textarea gets focus, do something */
