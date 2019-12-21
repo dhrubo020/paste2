@@ -8,7 +8,7 @@ exports.home = function (req, res) {
             if (err) {
                 throw err;
             } else {
-                res.render('home2.ejs', { data: results });
+                res.render('home2.ejs', { data: results.rows });
                 //res.json({data: results});
             }
         });
