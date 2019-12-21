@@ -25,7 +25,12 @@ exports.call_send = function(req,res){
         console.log('BD time: '+date.toLocaleString())
   
         var sql = "INSERT INTO `document` (`subject`,`text`,`datetime`) VALUES ('" + subject + "','" + text + "', '" + date.toLocaleString()+ "')";
+        
+       
+               console.log("Met 30:" + sql);
+           
         var query = db.query(sql, function(err, result) {
+                console.log("Met 33:", err, result);
             if(err){
                 message = "Something went wrong!!";
                 res.render('home2.ejs',{message: message});
@@ -39,7 +44,7 @@ exports.call_send = function(req,res){
                    "Message" : text,
                    "Date" : date.toLocaleString()
                }
-               console.log("Met :" + JSON.stringify({data:data}));
+               console.log("Met 42:" + JSON.stringify({data:data}));
                res.json({data:data});
             }
         });
