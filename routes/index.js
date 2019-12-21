@@ -16,7 +16,7 @@ exports.home = function (req, res) {
 
 exports.call_send = function(req,res){
     var data = req.body; subject = data.Subject; text = req.body.Text;
-    console.log(subject+" "+text);
+    console.log("Met :" + req.method);
 
     if(req.method == "POST"){
 
