@@ -4,6 +4,7 @@ exports.home = function (req, res) {
         var sql = "SELECT * FROM document ORDER BY id DESC";
         
         db.query(sql, function (err, results) {
+               console.log('line 7 q fun', err, results);
             if (err) {
                 throw err;
             } else {
@@ -22,15 +23,15 @@ exports.call_send = function(req,res){
 
         var bdTime = new Date().toLocaleString("en-US", {timeZone: "Asia/Dhaka"});
         var date = new Date(bdTime);
-        console.log('BD time: '+date.toLocaleString())
+        //console.log('BD time: '+date.toLocaleString())
   
         var sql = "INSERT INTO document (id, subject, text, datetime) VALUES ('" + id + "', '" + subject + "','" + text + "', '" + date.toLocaleString()+ "')";
         
        
-               console.log("Met 30:" + sql);
+               //console.log("Met 30:" + sql);
            
         var query = db.query(sql, function(err, result) {
-                console.log("Met 33:", err, result);
+                //console.log("Met 33:", err, result);
             if(err){
                 message = "Something went wrong!!";
                 res.render('home2.ejs',{message: message});
@@ -44,7 +45,7 @@ exports.call_send = function(req,res){
                    "Message" : text,
                    "Date" : date.toLocaleString()
                }
-               console.log("Met 42:" + JSON.stringify({data:data}));
+               //console.log("Met 42:" + JSON.stringify({data:data}));
                res.json({data:data});
             }
         });
