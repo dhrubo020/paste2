@@ -4,7 +4,7 @@ exports.home = function (req, res) {
         var sql = "SELECT * FROM document ORDER BY id DESC";
         
         db.query(sql, function (err, results) {
-               console.log('line 7 q fun', err, results);
+               console.log('line 7 q fun', results.rows);
             if (err) {
                 throw err;
             } else {
