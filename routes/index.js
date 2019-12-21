@@ -24,7 +24,7 @@ exports.call_send = function(req,res){
         var date = new Date(bdTime);
         console.log('BD time: '+date.toLocaleString())
   
-        var sql = "INSERT INTO `document` (`subject`,`text`,`datetime`) VALUES ('" + subject + "','" + text + "', '" + date.toLocaleString()+ "')";
+        var sql = "INSERT INTO document (subject, text, datetime) VALUES ('" + subject + "','" + text + "', '" + date.toLocaleString()+ "')";
         
        
                console.log("Met 30:" + sql);
