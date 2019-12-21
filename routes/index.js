@@ -1,13 +1,17 @@
 
 exports.home = function (req, res) {
-
-        var sql = "SELECT * FROM document ORDER BY ID DESC";
-        /*var sql = "CREATE TABLE IF NOT EXISTS document (
+        var init = `CREATE TABLE IF NOT EXISTS document (
            ID INT PRIMARY KEY      NOT NULL,
            Subject           CHAR(50) NOT NULL,
            Text           CHAR(5000) NOT NULL,
            DateTime           CHAR(50) NOT NULL
-        );"*/
+        )`
+        
+        db.query(init);
+        
+
+        var sql = "SELECT * FROM document ORDER BY ID DESC";
+        
         db.query(sql, function (err, results) {
             if (err) {
                 throw err;
