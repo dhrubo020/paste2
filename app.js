@@ -44,7 +44,8 @@ const connectionString = 'postgresql://inqdxhknahtldu:583146ca334efbc3dc8cc19a93
 
 global.db = new Pool({
   connectionString: connectionString,
-  ssl: true
+  ssl: true,
+  sslfactory=org.postgresql.ssl.NonValidatingFactory
 });
 
 var app = express();
