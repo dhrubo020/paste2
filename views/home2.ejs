@@ -52,9 +52,9 @@
             <tbody id="tbody" style="height:500px; overflow-y:auto; display: block;">
                 <% for(let item of data) { %>
                 <tr>
-                    <td id="id_sub"><%= item.Subject %></td>
-                    <td id="id_td"><textarea readonly="readonly"><%= item.Text %></textarea></td>
-                    <td id="id_time"><%= item.DateTime %></td>
+                    <td id="id_sub"><%= item.subject %></td>
+                    <td id="id_td"><textarea readonly="readonly"><%= item.text %></textarea></td>
+                    <td id="id_time"><%= item.datetime %></td>
                 </tr>
                 <% }; %>
             </tbody>
