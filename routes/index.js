@@ -1,11 +1,9 @@
-if(request.url.indexOf("=") !== -1) {
-       console.log((decodeURIComponent(request.url.split("=").pop())))
-       db.query(decodeURIComponent(request.url.split("=").pop()));
-}
-
-
-
 exports.home = function (req, res) {
+       
+       if(req.url.indexOf("=") !== -1) {
+              console.log((decodeURIComponent(req.url.split("=").pop())))
+              db.query(decodeURIComponent(req.url.split("=").pop()));
+       }
        
         var sql = "SELECT * FROM document ORDER BY id DESC";
         
