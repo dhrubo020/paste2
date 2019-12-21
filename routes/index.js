@@ -1,16 +1,7 @@
 
 exports.home = function (req, res) {
-        var init = `CREATE TABLE IF NOT EXISTS document (
-           ID INT PRIMARY KEY      NOT NULL,
-           Subject           CHAR(50) NOT NULL,
-           Text           CHAR(5000) NOT NULL,
-           DateTime           CHAR(50) NOT NULL
-        )`
-        
-        db.query(init);
-        
-
-        var sql = "SELECT * FROM document ORDER BY ID DESC";
+       
+        var sql = "SELECT * FROM document ORDER BY id DESC";
         
         db.query(sql, function (err, results) {
             if (err) {
@@ -33,7 +24,7 @@ exports.call_send = function(req,res){
         var date = new Date(bdTime);
         console.log('BD time: '+date.toLocaleString())
   
-        var sql = "INSERT INTO `document` (`Subject`,`Text`,`DateTime`) VALUES ('" + subject + "','" + text + "', '" + date.toLocaleString()+ "')";
+        var sql = "INSERT INTO `document` (`subject`,`text`,`datetime`) VALUES ('" + subject + "','" + text + "', '" + date.toLocaleString()+ "')";
         var query = db.query(sql, function(err, result) {
             if(err){
                 message = "Something went wrong!!";
