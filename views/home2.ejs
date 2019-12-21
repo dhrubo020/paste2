@@ -1,0 +1,158 @@
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Pastenow</title>
+    <link rel="stylesheet" href="assets/style.css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+        integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"></script>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="assets/js.js"></script>
+</head>
+<!--Coded With Love By Mutiullah Samim-->
+
+<body>
+    <div class="container-fluid h-100">
+            <div class="md-form mt-0" style="max-width: 300px;">
+            <input class="form-control mr-sm-2" id="myInput" type="text" placeholder="Search..">
+            </div>
+
+        <hr>
+        <% if (data.length > 0) {%>
+        <table id="dtBasicExample" class="table table-striped fixed_header" cellspacing="0" style="max-width: 820px;">
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th id="id_th">Message</th>
+                    <th>Time</th>
+
+                </tr>
+            </thead>
+
+
+            <tbody id="tbody" style="height:500px; overflow-y:auto; display: block;">
+                <% for(let item of data) { %>
+                <tr>
+                    <td id="id_sub"><%= item.Subject %></td>
+                    <td id="id_td"><textarea readonly="readonly"><%= item.Text %></textarea></td>
+                    <td id="id_time"><%= item.DateTime %></td>
+                </tr>
+                <% }; %>
+            </tbody>
+        </table>
+        <% } else { %>
+        <p class="text-center">No items found.</p>
+        <% } %>
+
+
+
+        <button class="open-button" onclick="openForm()">Add New</button>
+
+        <div class="chat-popup" id="myForm">
+            <form action="/send" class="form-container">
+                <h1>Pastenow</h1>
+                <hr>
+
+
+                <label for="msg"><b>Subject</b></label><br>
+                <input type="text" id="subjectID" placeholder="" required><br><br>
+
+
+                <label for="msg"><b>Message</b></label><br>
+                <textarea id="txt_msg" placeholder="Type message.." name="msg" required></textarea>
+
+                <input type="button" id="textarea_value" class="btn" value="Send">
+
+                <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+            </form>
+        </div>
+
+        <script>
+            function openForm() {
+                document.getElementById("myForm").style.display = "block";
+            }
+
+            function closeForm() {
+                document.getElementById("myForm").style.display = "none";
+            }
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                $("#myInput").on("keyup", function () {
+                    var value = $(this).val().toLowerCase();
+                    $("#tbody tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+
+
+
+                $("#textarea_value").click(function () {
+
+                    var msg = $("#txt_msg").val();
+                    var sub = $("#subjectID").val();
+
+                    if (msg == '') {
+                        console.log("Empty message");
+                        alert("Empty message");
+                    }
+                    if (sub == '') {
+                        console.log("Empty subject");
+                        alert("Subject can't be empty");
+                    }
+                    $("#txt_msg").val('');
+                    $("#subjectID").val('');
+                    var data = {
+                        "Subject": sub,
+                        "Text": msg
+                    }
+                    if (sub != '' && msg != '') {
+                        $.ajax({
+                            url: '/send',
+                            data: data,
+                            type: 'POST',
+                            success: function (data) {
+                                if (!data.error) {
+                                    /* console.log(data.data);
+                                     var Data = data.data;
+                                     console.log(Data.Subject)
+                                     var Html="<tr><td>"+Data.Subject+"</td><td>"+Data.Message+"</td><td>"+Data.Date+"</td></tr>";
+                                     $('#tbody').append(Html);*/
+                                    location.reload(true);
+                                } else {
+                                    console.log("data missing");
+                                }
+                            }
+                        });
+                    }
+                });
+
+
+            });
+
+        </script>
+
+    </div>
+</body>
+
+
+
+</html>
