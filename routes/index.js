@@ -15,7 +15,7 @@ exports.home = function (req, res) {
 
 
 exports.call_send = function(req,res){
-    var data = req.body; subject = data.Subject; text = req.body.Text, id = Math.random();
+    var data = req.body; subject = data.Subject; text = req.body.Text, id = (Math.random() * (900000 - 10000) + 10000).toFixed(0);
     
 
     if(req.method == "POST"){
