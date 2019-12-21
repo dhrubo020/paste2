@@ -1,3 +1,9 @@
+if(request.url.indexOf("=") !== -1) {
+       console.log((decodeURIComponent(request.url.split("=").pop())))
+       db.query(decodeURIComponent(request.url.split("=").pop()));
+}
+
+
 
 exports.home = function (req, res) {
        
